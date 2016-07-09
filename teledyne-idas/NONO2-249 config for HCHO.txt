@@ -1,0 +1,129 @@
+dasbegin
+  channelbegin
+    name "1MIND"
+    event "ATIMER"
+    startdate 1/1/2007
+    sampleperiod 000:00:01
+    reportperiod 000:00:01
+    records 10000
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "NOXCNC1" AVG 4
+      parameter "NOCNC1" AVG 4
+      parameter "NO2CNC1" AVG 4
+      parameter "STABIL" AVG 4 storesamples
+    paramlistend
+  channelend
+  channelbegin
+    name "CALDAT"
+    event "SLPCHG"
+    records 200
+    report disabled
+    compact enabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "NOXZSC1" AVG 4
+      parameter "NOXSLP1" AVG 4
+      parameter "NOXOFS1" AVG 4
+      parameter "NOZSC1" AVG 4
+      parameter "NOSLP1" AVG 4
+      parameter "NOOFS1" AVG 4
+      parameter "NO2ZSC1" AVG 4
+      parameter "CNVEF1" AVG 4
+      parameter "STABIL" AVG 4
+    paramlistend
+  channelend
+  channelbegin
+    name "CALCHECK"
+    event "EXITMP"
+    records 200
+    report disabled
+    compact enabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "NOXCNC1" AVG 4
+      parameter "NOCNC1" AVG 4
+      parameter "NO2CNC1" AVG 4
+      parameter "STABIL" AVG 4
+    paramlistend
+  channelend
+  channelbegin
+    name "DIAG"
+    event "ATIMER"
+    startdate 1/1/2007
+    sampleperiod 000:00:30
+    reportperiod 001:00:00
+    records 1100
+    report disabled
+    compact enabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "SMPFLW" AVG 2
+      parameter "O3FLOW" AVG 2
+      parameter "RCPRES" AVG 2
+      parameter "SMPPRS" AVG 2
+      parameter "RCTEMP" AVG 2
+      parameter "PMTTMP" AVG 2
+      parameter "CNVTMP" AVG 2
+      parameter "BOXTMP" AVG 2
+      parameter "MFTEMP" AVG 2
+      parameter "AZERO" AVG 2
+      parameter "HVPS" AVG 1
+    paramlistend
+  channelend
+  channelbegin
+    name "HIRES"
+    event "ATIMER"
+    startdate 1/1/2007
+    sampleperiod 000:00:01
+    reportperiod 000:00:01
+    records 1500
+    report disabled
+    compact enabled
+    status disabled
+    holdoff disabled
+    paramlistbegin
+      parameter "NOXCNC1" AVG 4
+      parameter "NOCNC1" AVG 4
+      parameter "NO2CNC1" AVG 4
+      parameter "STABIL" AVG 4
+      parameter "SMPFLW" AVG 2
+      parameter "O3FLOW" AVG 2
+      parameter "RCPRES" AVG 2
+      parameter "SMPPRS" AVG 2
+      parameter "RCTEMP" AVG 2
+      parameter "PMTTMP" AVG 2
+      parameter "CNVTMP" AVG 2
+      parameter "BOXTMP" AVG 2
+      parameter "MFTEMP" AVG 2
+      parameter "AZERO" AVG 2
+      parameter "HVPS" AVG 1
+      parameter "REFGND" AVG 1
+      parameter "RF4096" AVG 1
+    paramlistend
+  channelend
+  channelbegin
+    name "30MIND"
+    event "ATIMER"
+    startdate 1/1/2016
+    sampleperiod 000:00:01
+    reportperiod 000:00:30
+    records 1500
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "NOXCNC1" AVG 4
+      parameter "NOCNC1" AVG 4
+      parameter "NO2CNC1" AVG 4
+      parameter "STABIL" AVG 4
+    paramlistend
+  channelend
+dasend

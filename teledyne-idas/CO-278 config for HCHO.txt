@@ -1,0 +1,108 @@
+dasbegin
+  channelbegin
+    name "1MIND"
+    event "ATIMER"
+    startdate 1/1/2007
+    sampleperiod 000:00:01
+    reportperiod 000:00:01
+    records 10000
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "CONC1" AVG 6
+      parameter "STABIL" AVG 6
+    paramlistend
+  channelend
+  channelbegin
+    name "PNUMTC"
+    event "ATIMER"
+    startdate 1/1/2016
+    sampleperiod 000:00:05
+    reportperiod 001:00:00
+    records 360
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "SMPFLW" AVG 1
+      parameter "SMPPRS" AVG 1
+    paramlistend
+  channelend
+  channelbegin
+    name "CALDAT"
+    event "SLPCHG"
+    records 200
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "SLOPE1" INST 3
+      parameter "OFSET1" INST 1
+      parameter "ZSCNC1" INST 1
+    paramlistend
+  channelend
+  channelbegin
+    name "STBZERO"
+    event "EXITZR"
+    records 200
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "STABIL" INST 2
+      parameter "DETMES" INST 1
+      parameter "RATIO" INST 3
+    paramlistend
+  channelend
+  channelbegin
+    name "STBSPN"
+    event "EXITSP"
+    records 200
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "DETMES" INST 1
+      parameter "RATIO" INST 3
+    paramlistend
+  channelend
+  channelbegin
+    name "TEMP"
+    event "ATIMER"
+    startdate 1/1/2016
+    sampleperiod 000:00:01
+    reportperiod 000:06:00
+    records 400
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "BNTEMP" AVG 1
+      parameter "BOXTMP" AVG 1
+      parameter "PHTDRV" AVG 1
+    paramlistend
+  channelend
+  channelbegin
+    name "30MIND"
+    event "ATIMER"
+    startdate 1/1/2016
+    sampleperiod 000:00:01
+    reportperiod 000:00:30
+    records 1500
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "CONC1" AVG 1
+      parameter "STABIL" AVG 2
+    paramlistend
+  channelend
+dasend

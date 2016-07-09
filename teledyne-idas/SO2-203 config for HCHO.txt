@@ -1,0 +1,64 @@
+dasbegin
+  channelbegin
+    name "1MIND"
+    event "ATIMER"
+    startdate 1/1/2008
+    sampleperiod 000:00:01
+    reportperiod 000:00:01
+    records 10000
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "CONC1" AVG 4
+      parameter "STABIL" AVG 4
+    paramlistend
+  channelend
+  channelbegin
+    name "PNUTMC"
+    event "ATIMER"
+    startdate 1/1/2016
+    sampleperiod 000:00:05
+    reportperiod 001:00:00
+    records 200
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "SMPFLW" AVG 1
+      parameter "SMPPRS" AVG 1
+    paramlistend
+  channelend
+  channelbegin
+    name "CALDAT"
+    event "SLPCHG"
+    records 100
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "SLOPE1" INST 3
+      parameter "OFSET1" INST 1
+      parameter "ZSCNC1" INST 1
+    paramlistend
+  channelend
+  channelbegin
+    name "30MIND"
+    event "ATIMER"
+    startdate 1/1/2016
+    sampleperiod 000:00:01
+    reportperiod 000:00:30
+    records 1500
+    report disabled
+    compact disabled
+    status enabled
+    holdoff disabled
+    paramlistbegin
+      parameter "CONC1" AVG 4
+      parameter "STABIL" AVG 4
+    paramlistend
+  channelend
+dasend

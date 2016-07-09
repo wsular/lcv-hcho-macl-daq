@@ -112,6 +112,15 @@ aggregation (i.e. at 1Hz) into a cumulative delimited text file.
 
 ### Data Products
 
+#### Examples
+
+A [Jupyter][jup] notebook titled 'Examples in Python' is in the `/data`
+directory. [Click here][exnb] to see it rendered with [nbviewer][nbv].
+
+  [jup]: http://jupyter.org
+  [exnb]: http://nbviewer.jupyter.org/urls/bitbucket.org/wsular/2016-hcho-macl-daq/raw/writeup/data/Examples%20in%20Python.ipynb
+  [nbv]: http://nbviewer.jupyter.org
+
 #### DAQFactory Files
 
 * File name format: `Lewiston_RackYYMMDD.txt` where `YYMMDD` is date stamp

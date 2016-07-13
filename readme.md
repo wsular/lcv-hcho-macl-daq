@@ -76,14 +76,16 @@ to storage. A new file is created each day at midnight.
 > **N.B.** All measurements are aggregated into mean values within the 1-minute
 > logging interval, **including** wind direction avg/min/max and relative
 > humidity from the WXT510. 
-  
+
+&nbsp;
+
 > Analog voltage signals are inherently susceptible to noise and bias. At low
 > concentrations, the signal may be distorted significantly. To avoid this,
 > it is recommended to use data in files created by APICOM or LI-840A Software
 > in preference to DAQFactory data files.
 
 Here is a screenshot of the computer with DAQFactory running on the 2nd desktop
-(multiple desktops provided by [VirtuaWin](http://virtuawin.sourceforge.net).
+(multiple desktops provided by [VirtuaWin](http://virtuawin.sourceforge.net)).
 
 ![Screenshot of DAQFactory on desktop 2](images/desktop2.png)
 
@@ -122,9 +124,9 @@ Here is a screenshot of the LI-840A Software running on desktop #4:
 
 #### Examples
 
-Basic examples of data import and plotting are available in the Jupyter
-notebook titled 'Examples in Python' in the `/data` directory. 
-[Click here][exnb] to see it rendered with [nbviewer][nbv].
+Basic import and plotting examples are available in the Jupyter notebook
+'/data/Examples in Python.ipynb'. [**Click here**][exnb] to see it rendered
+with [nbviewer][nbv].
 
   [exnb]: http://nbviewer.jupyter.org/urls/bitbucket.org/wsular/2016-hcho-macl-daq/raw/writeup/data/Examples%20in%20Python.ipynb
   [nbv]: http://nbviewer.jupyter.org
@@ -135,7 +137,7 @@ notebook titled 'Examples in Python' in the `/data` directory.
   using two-digit year
 * Record interval: nominal 1-min (every 60sec/not aligned to minute) (anchors unknown)
 * Aggregation: mean 1-min values of real-time measurements
-    * **yes, naive mean applied even to WD & RH from WXT510**
+    * naive mean used, including for WD & RH from WXT510
 
 | Column name  | Units        | Description                                  |
 |--------------|--------------|----------------------------------------------|
@@ -168,13 +170,13 @@ notebook titled 'Examples in Python' in the `/data` directory.
 | WXT_Ta       | degC         | air temperature                              |
 | WXT_Ua       | %            | relative humidity                            |
 
-Example: convert timestamp to [Excel serial date][excl] (assuming `TheTime` is
+*Example:* convert timestamp to [Excel serial date][excl] (assuming `TheTime` is
 column A) ([ref][exclref]):
 ```excel
 =(A1/86400)+DATE(1970,1,1)
 ```
 
-Example: import using [pandas][pd] in Python:
+*Example:* import using [pandas][pd] in Python:
 ```python
 import pandas as pd
 
@@ -223,7 +225,7 @@ df = pd.read_csv('/path/to/the/file.txt',
 | NO2CNC1-AVG (PPB) | ppb      | mean nitrogen dioxide mixing ratio           |
 | STABIL-AVG (PPM)  | *ppb*\*  | concentration stability                      |
 
-> \* Header contradicts common sense and user manual -- proceed with caution.
+*\* File header contradicts common sense and user manual -- it's probably ppb.*
 
 ##### O3
 
@@ -243,7 +245,7 @@ df = pd.read_csv('/path/to/the/file.txt',
 | CONC1-AVG (PPM)  | ppm      | mean sulfur dioxide mixing ratio             |
 | STABIL-AVG (PPM) | ppm      | concentration stability                      |
 
-Example: import using pandas in Python:
+*Example:* import using pandas in Python (valid for all TAPI csv files):
 ```python
 import pandas as pd
 
@@ -263,7 +265,7 @@ df = pd.read_csv('/path/to/the/file.txt',
 
 | Column name         | Units     | Description                              |
 |---------------------|-----------|------------------------------------------|
-| Date(Y-M-D)         | *n/a*     | date portion of timestamp (PST)          |
+| Date(Y-M-D)         | UTC-0800  | date portion of timestamp (PST)          |
 | Time(H:M:S)         | UTC-0800  | time portion of timestamp (PST)          |
 | CO2(ppm)            | ppm       | carbon dioxide mixing ratio              |
 | H2O(ppt)            | ppth      | water vapor mixing ratio                 |
@@ -272,7 +274,7 @@ df = pd.read_csv('/path/to/the/file.txt',
 | Cell_Pressure(kPa)  | kPa       | pressure in measurement cell             |
 
 
-Example: import using pandas in Python:
+*Example:* import using pandas in Python:
 ```python
 import pandas as pd
 

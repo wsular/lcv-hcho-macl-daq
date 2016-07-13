@@ -67,9 +67,7 @@ table below.
 
 #### DAQFactory
 
-> **TODO** verify DAQFactory model/version
-
-A 19" rack-mounted PC running HMI/SCADA software (DAQFactory 5.87; Azeotech)
+A 19" rack-mounted PC running HMI/SCADA software (DAQFactory 5.87a; Azeotech)
 acquires data via analog voltage signals (for gas analyzers and flow meter) or
 serial port (for weather station) and stores data to delimited text file. Raw 
 measurements are aggregated on 60sec intervals into mean (average) values prior
@@ -78,11 +76,16 @@ to storage. A new file is created each day at midnight.
 > **N.B.** All measurements are aggregated into mean values within the 1-minute
 > logging interval, **including** wind direction avg/min/max and relative
 > humidity from the WXT510. 
-
+  
 > Analog voltage signals are inherently susceptible to noise and bias. At low
 > concentrations, the signal may be distorted significantly. To avoid this,
 > it is recommended to use data in files created by APICOM or LI-840A Software
 > in preference to DAQFactory data files.
+
+Here is a screenshot of the computer with DAQFactory running on the 2nd desktop
+(multiple desktops provided by [VirtuaWin](http://virtuawin.sourceforge.net).
+
+![Screenshot of DAQFactory on desktop 2](images/desktop2.png)
 
 #### APICOM
 
@@ -97,27 +100,32 @@ Several instances of the manufacturer-provided communications utility
 retrieving the latest records and appending them to cumulative delimited text 
 files. One instance handles the retrieval for one analyzer. 
 
+Here is a screenshot of the APICOM software running on desktop #3:
+
+![Screenshot of APICOM on desktop 3](images/desktop3.png)
+
 #### LI-840A Software
 
-> **TODO** get version #
-
 A single instance of the manufacturer-provided interface software (LI-840A
-Software XXXXX; LI-COR Biosciences) runs in the background on the rack PC, performing
-continuous acquisition of the serial data stream. The data is recorded without
-aggregation (i.e. at 1Hz) into a cumulative delimited text file.
+Software 2.0.0; LI-COR Biosciences) runs in the background on the rack PC,
+performing continuous acquisition of the serial data stream. The data is
+recorded without aggregation into a cumulative delimited text file.
 
-> In the interest of long-term reliability, **do not** engage the plotting
+> In the interest of long-term reliability, do not engage the plotting
 > features of LI-840A Software.
 
+Here is a screenshot of the LI-840A Software running on desktop #4:
+
+![Screenshot of LI-840A Software on desktop 4](images/desktop4.png)
 
 ### Data Products
 
 #### Examples
 
-A [Jupyter][jup] notebook titled 'Examples in Python' is in the `/data`
-directory. [Click here][exnb] to see it rendered with [nbviewer][nbv].
+Basic examples of data import and plotting are available in the Jupyter
+notebook titled 'Examples in Python' in the `/data` directory. 
+[Click here][exnb] to see it rendered with [nbviewer][nbv].
 
-  [jup]: http://jupyter.org
   [exnb]: http://nbviewer.jupyter.org/urls/bitbucket.org/wsular/2016-hcho-macl-daq/raw/writeup/data/Examples%20in%20Python.ipynb
   [nbv]: http://nbviewer.jupyter.org
 
@@ -131,7 +139,7 @@ directory. [Click here][exnb] to see it rendered with [nbviewer][nbv].
 
 | Column name  | Units        | Description                                  |
 |--------------|--------------|----------------------------------------------|
-| TheTime      | UTC-0800     | [unix epoch][epch] (Pacific Standard Time)   |
+| TheTime      | UTC-0800     | seconds since midnight Jan 1, 1970 in **local** time (Pacific Standard Time) |
 | LabjackU3_T  | degC         | temperature of DAQ hardware                  |
 | LI840A_CO2   | ppm          | carbon dioxide mixing ratio                  |
 | LI840A_H2O   | ppth         | water vapor mixing ratio                     |
@@ -163,7 +171,7 @@ directory. [Click here][exnb] to see it rendered with [nbviewer][nbv].
 Example: convert timestamp to [Excel serial date][excl] (assuming `TheTime` is
 column A) ([ref][exclref]):
 ```excel
-=(A1/86400)+DATE(1970,1,1)+(-8/24)
+=(A1/86400)+DATE(1970,1,1)
 ```
 
 Example: import using [pandas][pd] in Python:
@@ -173,10 +181,11 @@ import pandas as pd
 df = pd.read_csv('/path/to/the/file.txt',
                  header=0, # headers 1st row
                  index_col=0, # timestamps 1st column
-                 # interpret as seconds (since 1970)
+                 # specify as seconds to recognize as epoch timestamp.. BUT
+                 # it's local time (i.e. no timezone conversion required)
+                 # (Section 9.10.3, http://www.azeotech.com/dl/usersguide.pdf)
                  date_parser=lambda x: pd.to_datetime(x, unit='s'),
                  parse_dates=True)
-df.shift(-8, freq='H') # roll back UTC to PST (-0800)
 ```
 
   [excl]: https://support.office.com/en-us/article/Date-and-time-functions-reference-fd1b5961-c1ae-4677-be58-074152f97b81
@@ -190,8 +199,10 @@ df.shift(-8, freq='H') # roll back UTC to PST (-0800)
     * `XX` is the measured gases (`CO`, `NONO2`, `O3` or `SO2`)
     * `TTT` is either of `1min` or `30min`, representing 1-min or 30-min values
     * `YYYYMMDD` is the file creation date (not start of data in file)
-* Record interval: 1 minute (closed left, label right) (timestamped at 1-second
-  resolution, not 1-minute, thus label is of form `hh:mm:01`)
+* Record interval: 
+    * either 1-minute or 30-minutes (closed left, label right)
+    * in both cases, timestamped at 1-second resolution (not 1-minute) and thus
+      label is of form `hh:mm:01`
 * Aggregation: mean 1-min values of real-time measurements
 
 ##### CO
@@ -200,7 +211,7 @@ df.shift(-8, freq='H') # roll back UTC to PST (-0800)
 |------------------|----------|----------------------------------------------|
 | Time Stamp       | UTC-0800 | timestamp in US date format (mm/dd) (PST)    |
 | CONC1-AVG (PPM)  | ppm      | mean carbon monoxide mixing ratio            |
-| STABIL-AVG (PPM) | ppm      |
+| STABIL-AVG (PPM) | ppm      | concentration stability                      |
 
 ##### NONO2
 
@@ -210,7 +221,9 @@ df.shift(-8, freq='H') # roll back UTC to PST (-0800)
 | NOXCNC1-AVG (PPB) | ppb      | mean total mono-oxides of nitrogen mixing ratio |
 | NOCNC1-AVG (PPB)  | ppb      | mean nitric acid mixing ratio                |
 | NO2CNC1-AVG (PPB) | ppb      | mean nitrogen dioxide mixing ratio           |
-| STABIL-AVG (PPM)  | ppm      |
+| STABIL-AVG (PPM)  | *ppb*\*  | concentration stability                      |
+
+> \* Header contradicts common sense and user manual -- proceed with caution.
 
 ##### O3
 
@@ -218,9 +231,9 @@ df.shift(-8, freq='H') # roll back UTC to PST (-0800)
 |------------------|----------|----------------------------------------------|
 | Time Stamp       | UTC-0800 | timestamp in US date format (mm/dd) (PST)    |
 | CONC1-AVG (PPM)  | ppm      | mean ozone mixing ratio                      |
-| STABIL-AVG (PPM) | ppm      |
 
-> **TODO FIXME** why isn't o3 monitor recording stability parameter?
+> **TODO** where is STABIL? was supposed to be included in recorded parameters
+> but is missing? updating now will dump existing data set from memory...
 
 ##### SO2
 
@@ -228,7 +241,7 @@ df.shift(-8, freq='H') # roll back UTC to PST (-0800)
 |------------------|----------|----------------------------------------------|
 | Time Stamp       | UTC-0800 | timestamp in US date format (mm/dd) (PST)    |
 | CONC1-AVG (PPM)  | ppm      | mean sulfur dioxide mixing ratio             |
-| STABIL-AVG (PPM) | ppm      |
+| STABIL-AVG (PPM) | ppm      | concentration stability                      |
 
 Example: import using pandas in Python:
 ```python

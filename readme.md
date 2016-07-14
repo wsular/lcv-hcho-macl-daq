@@ -292,28 +292,35 @@ Step-by-step instructions are available in the relevant user manuals. See
 
 #### Weather Station (WXT510)
 
-> **TODO**
+Little, if any, configuration is required.
+
+* wired as RS-232 and powered through modified USB-serial adapter
+* used in polled mode
 
 
 #### Teledyne analyzers
 
-> **TODO**
+General config done (i.e. optional, not project-specific):
+
+* give nice hostnames (`co`, `nox`, ...)
+* use DHCP (in conjunction with IP reservations)
+
+Project-specific configuration files for onboard data logging (iDAS feature)
+for each analyzer are available under `/teledyne-idas`. Load these config files
+using APICOM.
 
 
 #### Router
 
-The router contains DHCP reservations and port forwarding rules which permit
-devices to talk to one another.
+Things to do:
 
-> **TODO**
+* create DHCP reservations (static IP address assignments)
+* create port forward rules for Remote Desktop Connection
+* disable Wi-Fi
+
 
 #### Broadband Modem (Raven X)
 
-> **TODO**
-
-Review this:
-
-```
 Login to the device's web interface (typ. <http://192.168.13.31:9191> from the
 LAN side) and set the following configuration (on factory defaults):
 
@@ -333,20 +340,26 @@ LAN side) and set the following configuration (on factory defaults):
     * SNTP Server Address: *[pick one](http://www.pool.ntp.org/en/)*
 
 Apply and reboot.
-```
 
 
 #### Rack PC
 
-The rack PC runs DAQFactory, APICOM, LI-840A Software and other important
-utilities.
+The rack PC runs DAQFactory, APICOM, and LI-840A Software for data acquisition
+purposes -- see above for details. Additionally, the rack PC runs:
 
-list desktops & show pictures
+* Network Time Protocol Service, to keep clock tightly synchronized
+* WinSCP, to mirror local data files to a WSU-hosted server
 
-> **TODO**
+  [ntpd]: https://www.meinbergglobal.com/english/sw/ntp.htm
+  [winscp]: http://winscp.net/eng/index.php
 
+> We are omitting all the specific details of setup for the rack PC, sorry.
 
+Instead of using the "keep-up-to-date" feature of WinSCP (which would result in
+a massive cell phone bill), we run it periodically with Windows Task Scheduler.
+Here is a (tastefully redacted) screenshot of WinSCP in action:
 
+![Screenshot of WinSCP on desktop 1](images/desktop1.png)
 
 
 ### References

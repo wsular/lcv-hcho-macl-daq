@@ -33,7 +33,7 @@ Additionally, a ceilometer ([CL31; Vaisala][cl31]) deployed on the MACL roof
 captures cloud height and coverage. Usage and data handling for the ceilometer
 are not covered here.
 
-> The PTR-MS and NOy analyer are listed for completeness; neither instrument
+> The PTR-MS and NOy analyzer are listed for completeness; neither instrument
 > is addressed here.
 
   [wxt510]: http://www.campbellsci.com/wxt510
@@ -120,15 +120,16 @@ Here is a screenshot of the LI-840A Software running on desktop #4:
 
 ![Screenshot of LI-840A Software on desktop 4](images/desktop4.png)
 
+
 ### Data Products
 
 #### Examples
 
-Basic import and plotting examples are available in the Jupyter notebook
-'/data/Examples in Python.ipynb'. [**Click here**][exnb] to see it rendered
-with [nbviewer][nbv].
+See this Jupyter notebook (rendered with [nbviewer][nbv]):
 
-  [exnb]: http://nbviewer.jupyter.org/urls/bitbucket.org/wsular/2016-hcho-macl-daq/raw/writeup/data/Examples%20in%20Python.ipynb
+* [Examples in Python][exnb]
+
+  [exnb]: http://nbviewer.jupyter.org/urls/bitbucket.org/wsular/2016-hcho-macl-daq/raw/master/data/Examples%20in%20Python.ipynb
   [nbv]: http://nbviewer.jupyter.org
 
 #### DAQFactory Files
@@ -273,7 +274,6 @@ df = pd.read_csv('/path/to/the/file.txt',
 | Cell_Temperature(C) | degC      | temperature in measurement cell          |
 | Cell_Pressure(kPa)  | kPa       | pressure in measurement cell             |
 
-
 *Example:* import using pandas in Python:
 ```python
 import pandas as pd
@@ -297,7 +297,6 @@ Little, if any, configuration is required.
 * wired as RS-232 and powered through modified USB-serial adapter
 * used in polled mode
 
-
 #### Teledyne analyzers
 
 General config done (i.e. optional, not project-specific):
@@ -309,7 +308,6 @@ Project-specific configuration files for onboard data logging (iDAS feature)
 for each analyzer are available under `/teledyne-idas`. Load these config files
 using APICOM.
 
-
 #### Router
 
 Things to do:
@@ -317,7 +315,6 @@ Things to do:
 * create DHCP reservations (static IP address assignments)
 * create port forward rules for Remote Desktop Connection
 * disable Wi-Fi
-
 
 #### Broadband Modem (Raven X)
 
@@ -340,7 +337,6 @@ LAN side) and set the following configuration (on factory defaults):
     * SNTP Server Address: *[pick one](http://www.pool.ntp.org/en/)*
 
 Apply and reboot.
-
 
 #### Rack PC
 

@@ -357,6 +357,16 @@ Here is a (tastefully redacted) screenshot of WinSCP in action:
 
 ![Screenshot of WinSCP on desktop 1](images/desktop1.png)
 
+And here are the contents of the batch file used to launch WinSCP:
+
+```bat
+option batch on
+option confirm off
+open macl@lar-field-data
+synchronize remote -mirror -criteria=either C:\LCV_HCHO_2016\data /2016_HCHO/data/sunsetpark
+exit
+```
+
 
 ### References
 

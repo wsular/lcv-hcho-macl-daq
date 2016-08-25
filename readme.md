@@ -4,6 +4,8 @@ Mobile Air Chemistry Laboratory at Sunset Park
 Lewiston-Clarkston Valley Formaldehyde Study (2016)
 ---------------------------------------------------
 
+> Online: <https://bitbucket.org/wsular/2016-hcho-macl-daq>
+
 Documentation for the Mobile Air Chemistry Laboratory (MACL) at Sunset Park.
 The MACL contains gas-phase analyzers and meteorological sensors; measurements
 include:
